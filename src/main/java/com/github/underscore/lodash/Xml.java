@@ -1522,4 +1522,15 @@ public final class Xml {
     public static String formatXml(String xml) {
         return formatXml(xml, XmlStringBuilder.Step.THREE_SPACES);
     }
+
+    @SuppressWarnings("unchecked")
+    public static String changeXmlEncoding(String xml, XmlStringBuilder.Step identStep, String encoding) {
+        Object result = fromXml(xml, FromType.FOR_FORMAT);
+        ((Map) result).put("#encoding", encoding);
+        return toXml((Map) result, identStep);
+    }
+
+    public static String changeXmlEncoding(String xml, String encoding) {
+        return changeXmlEncoding(xml, XmlStringBuilder.Step.THREE_SPACES, encoding);
+    }
 }
